@@ -1,55 +1,49 @@
-CONTENT:
-# Simple Calculator Web App
+```markdown
+# Simple Calculator
 
-## Overview
-This is a simple calculator web application built using Django, which supports basic arithmetic operations: addition, subtraction, multiplication, and division.
+This is a simple calculator web application built with Django. It supports basic arithmetic operations: addition, subtraction, multiplication, and division.
+    
+## Setup and Usage
 
-## Features
-- Simple and functional user interface
-- Basic arithmetic operations: +, -, *, /
-- Error handling for invalid inputs
+### Prerequisites
+Make sure you have [Python](https://www.python.org/downloads/) (version >= 3.12) and [Django](https://www.djangoproject.com/) installed.
 
-## Requirements
-- Python >= 3.12
-- Django >= 4.2
-
-## Setup Instructions
-
-1. **Clone the Repository**
+### Getting Started
+1. Clone the repository:
    ```bash
    git clone <repository-url>
-   cd simple-calculator
+   cd simple_calculator
    ```
 
-2. **Set Up a Virtual Environment**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   ```
-
-3. **Install Requirements**
+2. Install requirements:
    ```bash
    pip install django
    ```
 
-4. **Run Migrations**
+3. Run the migrations:
    ```bash
    python manage.py migrate
    ```
 
-5. **Run the Server**
+4. Start the server:
    ```bash
    python manage.py runserver
    ```
 
-6. **Access the Application**
-   Open your web browser and visit `http://127.0.0.1:8000`.
+5. Open your web browser and go to:
+   ```
+   http://127.0.0.1:8000/
+   ```
 
-## Unit Tests
-To run the unit tests, execute the following command:
+### Running Tests
+To run the unit tests, use the following command:
 ```bash
-python manage.py test
+python manage.py test calculator
 ```
 
-## License
-This project is licensed under the MIT License.
+### Notes
+- Ensure that CSRF tokens are properly handled in your JavaScript.
+- For division by zero, the application will return 'undefined'.
+
+### Contributions
+Feel free to contribute by submitting a pull request or filing an issue.
