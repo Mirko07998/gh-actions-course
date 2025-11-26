@@ -1,8 +1,0 @@
-# Ignore Python bytecode files
-__pycache__/
-*.pyc
-*.pyo
-
-# Ignore test output
-*.xml
-*.html

@@ -1,27 +1,20 @@
-import unittest
-from io import StringIO
-import sys
-from hello_world import print_hello_world
+from setuptools import setup, find_packages
 
-class TestHelloWorld(unittest.TestCase):
-    """
-    Unit tests for the hello_world module.
-    """
-    
-    def test_print_hello_world(self):
-        """Tests that print_hello_world function prints 'Hello, World!'."""
-        # Redirect stdout to capture print statements
-        captured_output = StringIO()
-        sys.stdout = captured_output
-        
-        # Call the function
-        print_hello_world()
-        
-        # Reset redirect
-        sys.stdout = sys.__stdout__
-        
-        # Check captured output
-        self.assertEqual(captured_output.getvalue().strip(), 'Hello, World!')
-
-if __name__ == '__main__':
-    unittest.main()
+setup(
+    name='HelloWorld',
+    version='0.1',
+    packages=find_packages(),
+    description='A simple HelloWorld module',
+    author='Your Name',
+    author_email='your.email@example.com',
+    url='https://github.com/yourusername/helloworld',
+    install_requires=[
+        # Add any package dependencies here if needed
+    ],
+    classifiers=[
+        'Programming Language :: Python :: 3',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
+    ],
+    python_requires='>=3.6',
+)
