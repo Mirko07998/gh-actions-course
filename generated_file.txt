@@ -1,6 +1,2 @@
-# Ignore bytecode files and other common files
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-.env

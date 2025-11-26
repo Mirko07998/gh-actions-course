@@ -1,25 +1,13 @@
+import subprocess
 import unittest
-from io import StringIO
-import sys
-from hello_world import print_hello
 
 class TestHelloWorld(unittest.TestCase):
-    def test_print_hello(self):
+    def test_output(self):
         """
-        Test that print_hello() outputs the expected string.
+        Test to verify that the HelloWorld module prints 'Hello, World!'
         """
-        # Redirect stdout to capture print statements
-        captured_output = StringIO()
-        sys.stdout = captured_output
-
-        # Call the function
-        print_hello()
-
-        # Reset redirect.
-        sys.stdout = sys.__stdout__
-
-        # Check if output is as expected
-        self.assertEqual(captured_output.getvalue().strip(), "Hello, World!")
+        result = subprocess.run(['python3', 'hello_world.py'], capture_output=True, text=True)
+        self.assertEqual(result.stdout.strip(), "Hello, World!")
 
 if __name__ == '__main__':
     unittest.main()
