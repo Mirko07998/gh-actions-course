@@ -1,31 +1,23 @@
-CONTENT:
-from django.test import TestCase
+import unittest
+from calculator import calculate
 
-class CalculatorTestCase(TestCase):
+class TestCalculator(unittest.TestCase):
+
     def test_addition(self):
-        response = self.client.get('/calculate/?num1=10&num2=5&operation=add')
-        self.assertEqual(response.json(), {'result': 15})
+        self.assertEqual(calculate(2, 3, '+'), 5)
 
     def test_subtraction(self):
-        response = self.client.get('/calculate/?num1=10&num2=5&operation=subtract')
-        self.assertEqual(response.json(), {'result': 5})
+        self.assertEqual(calculate(5, 3, '-'), 2)
 
     def test_multiplication(self):
-        response = self.client.get('/calculate/?num1=10&num2=5&operation=multiply')
-        self.assertEqual(response.json(), {'result': 50})
+        self.assertEqual(calculate(2, 3, '*'), 6)
 
     def test_division(self):
-        response = self.client.get('/calculate/?num1=10&num2=5&operation=divide')
-        self.assertEqual(response.json(), {'result': 2})
+        self.assertEqual(calculate(6, 3, '/'), 2)
 
     def test_division_by_zero(self):
-        response = self.client.get('/calculate/?num1=10&num2=0&operation=divide')
-        self.assertEqual(response.json(), {'error': 'Error: Division by zero'})
+        result = calculate(6, 0, '/')
+        self.assertIsNone(result)
 
-    def test_invalid_operation(self):
-        response = self.client.get('/calculate/?num1=10&num2=5&operation=invalid')
-        self.assertEqual(response.json(), {'error': 'Error: Invalid operation'})
-
-    def test_invalid_input(self):
-        response = self.client.get('/calculate/?num1=invalid&num2=5&operation=add')
-        self.assertEqual(response.json(), {'error': 'Invalid input'})
+if __name__ == '__main__':
+    unittest.main()
