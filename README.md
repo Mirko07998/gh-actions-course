@@ -1,21 +1,24 @@
 # Simple Calculator
 
-This is a simple command-line calculator that performs basic arithmetic operations: addition, subtraction, multiplication, and division.
+This is a simple console-based calculator application that can perform basic arithmetic operations such as addition, subtraction, multiplication, and division.
 
-## Features
-- Supports addition, subtraction, multiplication, and division.
-- Handles errors gracefully, including invalid inputs and division by zero.
-- Allows users to perform multiple calculations in one session.
+## Requirements
+- Python 3.x
 
 ## Usage
-Run the application using:
+To run the application, use the following command in your terminal:
 ```
 python calculator.py
 ```
 
-Follow the prompts to enter numbers and select an operator. The calculator will provide the result or an error message if necessary.
-
-To run tests, use:
+## How to Test
+To run the test suite, make sure you have `unittest` available and use:
 ```
 python -m unittest test_calculator.py
 ```
+
+## Features
+1. Supports basic arithmetic operations: +, -, *, /
+2. Error handling for non-numeric inputs, unsupported operators, and division by zero.
+3. User can perform multiple calculations.
+4. Application exits gracefully with a closing message.
