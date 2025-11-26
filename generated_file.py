@@ -1,13 +1,6 @@
-import subprocess
-import unittest
+import os
+from django.core.wsgi import get_wsgi_application
 
-class TestHelloWorld(unittest.TestCase):
-    def test_output(self):
-        """
-        Test to verify that the HelloWorld module prints 'Hello, World!'
-        """
-        result = subprocess.run(['python3', 'hello_world.py'], capture_output=True, text=True)
-        self.assertEqual(result.stdout.strip(), "Hello, World!")
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'calculator_project.settings')
 
-if __name__ == '__main__':
-    unittest.main()
+application = get_wsgi_application()
