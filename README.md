@@ -1,59 +1,40 @@
-CONTENT:
-# Simple Calculator Web App
+```markdown
+# Simple Calculator
 
-This project contains a simple calculator web application built using Django. It supports basic arithmetic operations: addition, subtraction, multiplication, and division.
+## Overview
+This is a simple web-based calculator application built using Django. It supports the basic operations: addition, subtraction, multiplication, and division.
 
 ## Prerequisites
-
-- Python 3.12 or higher
-- pip
-- Django
-- Uvicorn (for running the server)
+Make sure you have Python 3.12 or higher installed on your machine.
 
 ## Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://your-repository-url.git
-   cd your-repository-directory
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Install the required packages by running:
    ```
-
-2. Create a virtual environment:
-   ```bash
-   python -m venv env
-   source env/bin/activate  # On Windows use `env\Scripts\activate`
-   ```
-
-3. Install the required packages:
-   ```bash
    pip install -r requirements.txt
    ```
 
-4. Run database migrations (if needed):
-   ```bash
+## Running the Application
+1. Run the migrations:
+   ```
    python manage.py migrate
    ```
-
-5. Start the server using Uvicorn:
-   ```bash
-   uvicorn simple_calculator.asgi:application --host 127.0.0.1 --port 8000
+2. Start the development server:
    ```
-
-6. Open your browser and go to `http://127.0.0.1:8000/` to use the calculator.
+   python manage.py runserver
+   ```
+3. Open your browser and go to `http://127.0.0.1:8000/`.
 
 ## Usage
+1. Enter the first number in the "Number 1" field.
+2. Enter the second number in the "Number 2" field.
+3. Choose an operation by selecting one of the radio buttons.
+4. Click the "Calculate" button to view the result.
 
-Simply enter numbers and select an operation. Press "Calculate" to view the result. The calculator supports the following operations:
-- Addition (+)
-- Subtraction (-)
-- Multiplication (*)
-- Division (/)
-
-The application performs basic error handling, ensuring that division by zero is caught and handled gracefully.
-
-## Running Tests
-
-To run the unit tests, run the following command:
-```bash
-python manage.py test calculator
+## Testing
+To run the unit tests, execute:
+```
+python manage.py test
+```
 ```

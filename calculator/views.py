@@ -1,29 +1,35 @@
-CONTENT:
+```python
 from django.shortcuts import render
+from django.http import JsonResponse
 
 def home(request):
-    result = None
-    if request.method == "POST":
+    return render(request, 'calculator/home.html')
+
+def calculate(request):
+    if request.method == 'GET':
         try:
-            num1 = float(request.POST.get('num1'))
-            num2 = float(request.POST.get('num2'))
-            operation = request.POST.get('operation')
+            num1 = float(request.GET.get('num1', 0))
+            num2 = float(request.GET.get('num2', 0))
+            operation = request.GET.get('operation', '')
+            result = 0
 
-            if operation == 'add':
+            if operation == '+':
                 result = num1 + num2
-            elif operation == 'subtract':
+            elif operation == '-':
                 result = num1 - num2
-            elif operation == 'multiply':
+            elif operation == '*':
                 result = num1 * num2
-            elif operation == 'divide':
-                if num2 == 0:
-                    result = "Error: Division by zero"
-                else:
+            elif operation == '/':
+                if num2 != 0:
                     result = num1 / num2
+                else:
+                    return JsonResponse({'error': 'Division by zero is not allowed.'}, status=400)
             else:
-                result = "Invalid operation"
+                return JsonResponse({'error': 'Invalid operation.'}, status=400)
 
+            return JsonResponse({'result': result})
         except ValueError:
-            result = "Please enter valid numbers."
+            return JsonResponse({'error': 'Invalid input, please enter numbers only.'}, status=400)
 
-    return render(request, 'calculator/home.html', {'result': result})
+    return JsonResponse({'error': 'GET request required.'}, status=400)
+```
