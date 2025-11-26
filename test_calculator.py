@@ -1,38 +1,28 @@
-import io
-import sys
-from unittest import TestCase
-from unittest.mock import patch
-from calculator import add, subtract, multiply, divide
+import unittest
+from calculator import perform_calculation
 
-class TestCalculator(TestCase):
+class TestCalculator(unittest.TestCase):
 
     def test_addition(self):
-        self.assertEqual(add(1, 2), 3)
+        self.assertEqual(perform_calculation(5, '+', 3), 8)
 
     def test_subtraction(self):
-        self.assertEqual(subtract(5, 2), 3)
+        self.assertEqual(perform_calculation(5, '-', 3), 2)
 
     def test_multiplication(self):
-        self.assertEqual(multiply(3, 7), 21)
+        self.assertEqual(perform_calculation(5, '*', 3), 15)
 
     def test_division(self):
-        self.assertEqual(divide(10, 2), 5)
+        self.assertEqual(perform_calculation(6, '/', 3), 2)
+    
+    def test_division_by_zero(self):
+        self.assertEqual(perform_calculation(5, '/', 0), "Error: Cannot divide by zero.")
 
-    def test_divide_by_zero(self):
-        with self.assertRaises(ValueError) as context:
-            divide(5, 0)
-        self.assertEqual(str(context.exception), "Error: Cannot divide by zero.")
+    def test_unsupported_operator(self):
+        self.assertEqual(perform_calculation(5, '%', 3), "Error: Unsupported operator.")
 
-    @patch('sys.stdout', new_callable=io.StringIO)
-    def test_main_function_output(self, mock_stdout):
-        input_values = ['10', '+', '5', 'N']
-        with patch('builtins.input', side_effect=input_values):
-            with self.assertRaises(SystemExit):
-                from calculator import main
-                main()
-        self.assertIn("Result: 15.0", mock_stdout.getvalue())
-        self.assertIn("Goodbye!", mock_stdout.getvalue())
+    def test_non_numeric_values(self):
+        self.assertEqual(perform_calculation("a", '+', 3), "Error: Invalid input.")
 
 if __name__ == '__main__':
-    import unittest
     unittest.main()
