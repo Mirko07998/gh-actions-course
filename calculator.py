@@ -1,16 +1,20 @@
+import sys
+
+def welcome_message():
+    print("Welcome to the Simple Calculator")
+
 def get_number(prompt):
     while True:
-        user_input = input(prompt)
+        value = input(prompt)
         try:
-            return float(user_input)
+            return float(value)
         except ValueError:
-            print("Error: Please enter a numeric value.")
+            print("Error: Please enter a valid number.")
 
-def get_operator(prompt):
-    valid_operators = ['+', '-', '*', '/']
+def get_operator():
     while True:
-        operator = input(prompt)
-        if operator in valid_operators:
+        operator = input("Enter operator (+, -, *, /): ")
+        if operator in ['+', '-', '*', '/']:
             return operator
         else:
             print("Error: Unsupported operator. Please enter one of +, -, *, /.")
@@ -26,22 +30,22 @@ def calculate(num1, operator, num2):
         if num2 == 0:
             print("Error: Cannot divide by zero.")
             return None
-        return num1 / num2
+        else:
+            return num1 / num2
 
 def main():
-    print("Simple Calculator")
-    
+    welcome_message()
     while True:
-        num1 = get_number("Enter the first number: ")
-        operator = get_operator("Enter an operator (+, -, *, /): ")
-        num2 = get_number("Enter the second number: ")
-        
+        num1 = get_number("Enter first number: ")
+        operator = get_operator()
+        num2 = get_number("Enter second number: ")
+
         result = calculate(num1, operator, num2)
         if result is not None:
             print(f"Result: {result}")
-        
-        repeat = input("Do you want to perform another calculation? (Y/N): ").strip().upper()
-        if repeat != 'Y':
+
+        again = input("Do you want to perform another calculation? (Y/N): ").strip().lower()
+        if again != 'y':
             print("Goodbye!")
             break
 
