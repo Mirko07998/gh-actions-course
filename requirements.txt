@@ -1,0 +1,2 @@
+# This file specifies the requirements for the Simple Calculator project.
+# Currently, there are no external libraries needed.
