@@ -1,2 +1,1 @@
-# Required packages (if any for future extensions)
-# Currently, no external libraries are needed for this project.
+# No external dependencies for this simple calculator project

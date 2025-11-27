@@ -1,3 +1,5 @@
+import sys
+
 def add(x, y):
     return x + y
 
@@ -12,41 +14,45 @@ def divide(x, y):
         raise ValueError("Error: Cannot divide by zero.")
     return x / y
 
+def get_input():
+    try:
+        first_number = float(input("Enter the first number: "))
+        operator = input("Enter the operator (+, -, *, /): ")
+        second_number = float(input("Enter the second number: "))
+        return first_number, operator, second_number
+    except ValueError:
+        print("Error: Please enter valid numeric values.")
+        return None, None, None
+
+def calculate(first_number, operator, second_number):
+    if operator == '+':
+        return add(first_number, second_number)
+    elif operator == '-':
+        return subtract(first_number, second_number)
+    elif operator == '*':
+        return multiply(first_number, second_number)
+    elif operator == '/':
+        return divide(first_number, second_number)
+    else:
+        raise ValueError("Error: Unsupported operator.")
+
 def main():
     print("Simple Calculator")
-
     while True:
-        try:
-            first_number = input("Enter first number: ")
-            first_number = float(first_number)
-            
-            operator = input("Enter operator (+, -, *, /): ")
-            
-            second_number = input("Enter second number: ")
-            second_number = float(second_number)
-
-            if operator == '+':
-                result = add(first_number, second_number)
-            elif operator == '-':
-                result = subtract(first_number, second_number)
-            elif operator == '*':
-                result = multiply(first_number, second_number)
-            elif operator == '/':
-                result = divide(first_number, second_number)
-            else:
-                print("Error: Unsupported operator.")
-                continue
-            
-            print(f"Result: {result}")
-
-        except ValueError as e:
-            print(f"Error: {str(e)}")
+        first_number, operator, second_number = get_input()
+        if first_number is None:
             continue
+        
+        try:
+            result = calculate(first_number, operator, second_number)
+            print(f"Result: {result}")
+        except ValueError as e:
+            print(e)
 
-        repeat = input("Do you want to perform another calculation? (Y/N): ")
-        if repeat.upper() != 'Y':
+        repeat = input("Do you want to perform another calculation? (Y/N): ").strip().upper()
+        if repeat != 'Y':
             print("Goodbye!")
-            break
+            sys.exit(0)
 
 if __name__ == "__main__":
     main()
