@@ -1,1 +1,2 @@
-# No external dependencies for this simple calculator project
+# This file is for listing any external packages if needed.
+# For now, the program only uses built-in libraries.
