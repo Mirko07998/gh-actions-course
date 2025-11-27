@@ -1,5 +1,3 @@
-import sys
-
 def add(x, y):
     return x + y
 
@@ -11,52 +9,44 @@ def multiply(x, y):
 
 def divide(x, y):
     if y == 0:
-        raise ZeroDivisionError("Cannot divide by zero.")
+        raise ValueError("Error: Cannot divide by zero.")
     return x / y
 
-def get_number(prompt):
-    while True:
-        input_str = input(prompt)
-        try:
-            return float(input_str)
-        except ValueError:
-            print("Error: Please enter a numeric value.")
-
-def get_operator():
-    while True:
-        operator = input("Enter an operator (+, -, *, /): ")
-        if operator in ('+', '-', '*', '/'):
-            return operator
-        else:
-            print("Error: Unsupported operator. Please use +, -, * or /.")
-
-def calculate():
+def main():
     print("Simple Calculator")
-    
     while True:
-        num1 = get_number("Enter first number: ")
-        operator = get_operator()
-        num2 = get_number("Enter second number: ")
-
         try:
+            first_num = input("Enter the first number: ")
+            operator = input("Enter the operator (+, -, *, /): ")
+            second_num = input("Enter the second number: ")
+            
+            # Convert inputs to floats
+            first_num = float(first_num)
+            second_num = float(second_num)
+
+            # Perform the operation based on the operator
             if operator == '+':
-                result = add(num1, num2)
+                result = add(first_num, second_num)
             elif operator == '-':
-                result = subtract(num1, num2)
+                result = subtract(first_num, second_num)
             elif operator == '*':
-                result = multiply(num1, num2)
+                result = multiply(first_num, second_num)
             elif operator == '/':
-                result = divide(num1, num2)
+                result = divide(first_num, second_num)
+            else:
+                print("Error: Unsupported operator.")
+                continue
 
             print(f"Result: {result}")
 
-        except ZeroDivisionError as e:
-            print(f"Error: {e}")
+        except ValueError as e:
+            print(f"Error: {str(e)}")
+            continue
 
-        repeat = input("Do you want to perform another calculation? (Y/N): ").strip().upper()
-        if repeat == 'N':
+        should_continue = input("Do you want to perform another calculation? (Y/N): ")
+        if should_continue.lower() != 'y':
             print("Goodbye!")
-            sys.exit()
+            break
 
 if __name__ == "__main__":
-    calculate()
+    main()
