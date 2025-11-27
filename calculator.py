@@ -1,3 +1,5 @@
+import sys
+
 def add(x, y):
     return x + y
 
@@ -9,47 +11,52 @@ def multiply(x, y):
 
 def divide(x, y):
     if y == 0:
-        raise ValueError("Error: Cannot divide by zero.")
+        raise ZeroDivisionError("Cannot divide by zero.")
     return x / y
 
-def get_input(prompt):
-    return input(prompt)
+def get_number(prompt):
+    while True:
+        input_str = input(prompt)
+        try:
+            return float(input_str)
+        except ValueError:
+            print("Error: Please enter a numeric value.")
 
-def perform_calculation(first_number, operator, second_number):
-    if operator == '+':
-        return add(first_number, second_number)
-    elif operator == '-':
-        return subtract(first_number, second_number)
-    elif operator == '*':
-        return multiply(first_number, second_number)
-    elif operator == '/':
-        return divide(first_number, second_number)
-    else:
-        raise ValueError("Error: Unsupported operator.")
+def get_operator():
+    while True:
+        operator = input("Enter an operator (+, -, *, /): ")
+        if operator in ('+', '-', '*', '/'):
+            return operator
+        else:
+            print("Error: Unsupported operator. Please use +, -, * or /.")
 
-def main():
+def calculate():
     print("Simple Calculator")
     
     while True:
+        num1 = get_number("Enter first number: ")
+        operator = get_operator()
+        num2 = get_number("Enter second number: ")
+
         try:
-            first_input = get_input("Enter the first number: ")
-            operator = get_input("Enter operator (+, -, *, /): ")
-            second_input = get_input("Enter the second number: ")
+            if operator == '+':
+                result = add(num1, num2)
+            elif operator == '-':
+                result = subtract(num1, num2)
+            elif operator == '*':
+                result = multiply(num1, num2)
+            elif operator == '/':
+                result = divide(num1, num2)
 
-            first_number = float(first_input)
-            second_number = float(second_input)
-
-            result = perform_calculation(first_number, operator, second_number)
             print(f"Result: {result}")
 
-        except ValueError as e:
-            print(e)
-        
-        repeat = get_input("Do you want to perform another calculation? (Y/N): ").strip().upper()
-        if repeat == 'N':
-            break
+        except ZeroDivisionError as e:
+            print(f"Error: {e}")
 
-    print("Goodbye!")
+        repeat = input("Do you want to perform another calculation? (Y/N): ").strip().upper()
+        if repeat == 'N':
+            print("Goodbye!")
+            sys.exit()
 
 if __name__ == "__main__":
-    main()
+    calculate()

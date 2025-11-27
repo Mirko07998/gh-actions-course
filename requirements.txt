@@ -1,1 +1,2 @@
-unittest
+# No external libraries required yet. 
+# However, it could be updated if dependencies are added.
