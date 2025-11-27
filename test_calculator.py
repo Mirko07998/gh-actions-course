@@ -1,30 +1,41 @@
 import unittest
-from io import StringIO
-import sys
+from calculator import add, subtract, multiply, divide, perform_calculation
 
 class TestCalculator(unittest.TestCase):
 
-    def test_addition(self):
-        self.assertEqual(calculator.calculate(1, '+', 1), 2)
+    def test_add(self):
+        self.assertEqual(add(1, 2), 3)
 
-    def test_subtraction(self):
-        self.assertEqual(calculator.calculate(5, '-', 3), 2)
+    def test_subtract(self):
+        self.assertEqual(subtract(5, 2), 3)
 
-    def test_multiplication(self):
-        self.assertEqual(calculator.calculate(3, '*', 4), 12)
+    def test_multiply(self):
+        self.assertEqual(multiply(3, 4), 12)
 
-    def test_division(self):
-        self.assertEqual(calculator.calculate(10, '/', 2), 5)
+    def test_divide(self):
+        self.assertEqual(divide(10, 2), 5)
 
-    def test_division_by_zero(self):
+    def test_divide_by_zero(self):
         with self.assertRaises(ValueError) as context:
-            calculator.calculate(10, '/', 0)
+            divide(10, 0)
         self.assertEqual(str(context.exception), "Error: Cannot divide by zero.")
 
-    def test_unsupported_operator(self):
-        with self.assertRaises(ValueError) as context:
-            calculator.calculate(10, '^', 5)
-        self.assertEqual(str(context.exception), "Error: Unsupported operator. Please use +, -, *, or /.")
+    def test_perform_calculation_addition(self):
+        self.assertEqual(perform_calculation(3, '+', 2), 5)
 
-if __name__ == "__main__":
+    def test_perform_calculation_subtraction(self):
+        self.assertEqual(perform_calculation(5, '-', 2), 3)
+
+    def test_perform_calculation_multiplication(self):
+        self.assertEqual(perform_calculation(3, '*', 4), 12)
+
+    def test_perform_calculation_division(self):
+        self.assertEqual(perform_calculation(10, '/', 2), 5)
+
+    def test_perform_calculation_invalid_operator(self):
+        with self.assertRaises(ValueError) as context:
+            perform_calculation(3, '!', 2)
+        self.assertEqual(str(context.exception), "Error: Unsupported operator.")
+
+if __name__ == '__main__':
     unittest.main()
